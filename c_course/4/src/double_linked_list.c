@@ -13,6 +13,22 @@ itemOk(int c)
 }
 
 int
+is_int(char * s)
+{
+    /*
+     * Returns if 's' string is an integer
+     */
+
+    for (int i = 0; i < strlen(s); i++) {
+        if (s[i] < '0' || s[i] > '9') {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+int
 read_char(char * output)
 {
     /*
@@ -20,6 +36,7 @@ read_char(char * output)
      * ¿How can i change this procedure to
      * get the first char?
      */
+
     char c;
     int num_chars = 0;
     
@@ -41,6 +58,68 @@ read_char(char * output)
 }
 
 void
+str_upper(char * s)
+{
+    for (int i = 0; i < strlen(s); i++) {
+        // If is lower...
+
+        if (s[i] < 'a' && s[i] > 'z') {
+
+            // Change to upper:
+
+            s[i] = s[i] - ('a' - 'A');
+        }
+    }
+}
+
+int
+get_suit(SuitType * suit)
+{
+    char str[MAXSTR];
+    int n;
+
+    if (fgets(str, MAXSTR, stdin) == NULL) {
+        fprintf(stderr, "[ERROR] Invalid reading!\n");
+        return 0;
+    }
+    str[strlen(str) - 1] = '\0';    // Delete the '\n' char from the string
+
+    str_upper(str);
+
+    if (strcmp(str, "ESPADAS") == 0) {
+        *suit = ESPADAS;
+    } else if (strcmp(str, "COPAS") == 0) {
+        *suit = COPAS;
+    } else if (strcmp(str, "OROS") == 0) {
+        *suit = OROS; 
+    } else if (strcmp(str, "BASTOS") == 0) {
+        *suit = BASTOS;
+    } else {
+        return 0;
+    }
+
+    return 1;
+}
+
+int
+get_card(CardType * card)
+{
+    /*
+     * Store the new card in 'card'
+     */
+
+    SuitType suit;
+
+    // Get the suit:
+
+    if (! get_suit(&suit)) {
+        return 0;
+    }
+
+    // Read the value:
+}
+
+void
 print_menu()
 {
     printf("1) Add Card\n");
@@ -50,10 +129,23 @@ print_menu()
 }
 
 void
-run_action(char item, int * finish)
+add_card(ListType * list)
+{
+    // Get a card and add it to the double linked list
+
+    CardType card;
+
+    while (!get_card(&card)) {
+        fprintf(stderr, "[ERROR] Invalid card!\n");
+    }
+}
+
+void
+run_action(char item, int * finish, ListType * list)
 {
     switch (item) {
         case '1':
+            add_card(list);
             break;
 
         case '2':
@@ -73,6 +165,8 @@ main(int argc, char ** argv)
     char item;
     int finish;
 
+    ListType list;
+
     finish = 0;
     do{
 
@@ -83,7 +177,7 @@ main(int argc, char ** argv)
         }
 
         if (itemOk(item)) {
-            run_action(item, &finish);
+            run_action(item, &finish, &list);
             printf("Run action!\n");
         } else {
             fprintf(stderr, "[ERROR] Invalid input!\n");
