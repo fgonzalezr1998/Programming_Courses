@@ -87,13 +87,13 @@ get_suit(SuitType * suit)
     str_upper(str);
 
     if (strcmp(str, "ESPADAS") == 0) {
-        *suit = ESPADAS;
+        *suit = (SuitType)0;
     } else if (strcmp(str, "COPAS") == 0) {
-        *suit = COPAS;
+        *suit = (SuitType)1;
     } else if (strcmp(str, "OROS") == 0) {
-        *suit = OROS; 
+        *suit = (SuitType)2;
     } else if (strcmp(str, "BASTOS") == 0) {
-        *suit = BASTOS;
+        *suit = (SuitType)3;
     } else {
         return 0;
     }

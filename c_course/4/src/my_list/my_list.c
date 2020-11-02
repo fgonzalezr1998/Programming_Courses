@@ -1,7 +1,7 @@
 #include "my_list/my_list.h"
 
 int
-isEmpty(ListType * list)
+is_empty(ListType * list)
 {
     return list == NULL;
 }
@@ -9,7 +9,7 @@ isEmpty(ListType * list)
 void
 push(ListType * list, CardType card)
 {
-    if (isEmpty(list)) {
+    if (is_empty(list)) {
         printf("Empty list");
     } else {
         printf("Not empty list");
