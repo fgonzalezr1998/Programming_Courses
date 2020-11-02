@@ -5,6 +5,8 @@
 #include "my_list/my_list.h"
 
 #define MAXSTR 10
+#define MINCARDVALUE 1
+#define MAXCARDVALUE 12
 
 int
 itemOk(int c)
