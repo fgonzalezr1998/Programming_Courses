@@ -15,6 +15,12 @@ itemOk(int c)
 }
 
 int
+value_ok(int value)
+{
+    return value >= MINCARDVALUE && value <= MAXCARDVALUE;
+}
+
+int
 is_int(char * s)
 {
     /*
@@ -65,7 +71,7 @@ str_upper(char * s)
     for (int i = 0; i < strlen(s); i++) {
         // If is lower...
 
-        if (s[i] < 'a' && s[i] > 'z') {
+        if (s[i] <= 'z' && s[i] >= 'a') {
 
             // Change to upper:
 
@@ -78,7 +84,6 @@ int
 get_suit(SuitType * suit)
 {
     char str[MAXSTR];
-    int n;
 
     if (fgets(str, MAXSTR, stdin) == NULL) {
         fprintf(stderr, "[ERROR] Invalid reading!\n");
@@ -104,6 +109,33 @@ get_suit(SuitType * suit)
 }
 
 int
+get_value(int * value)
+{
+    char str[MAXSTR];
+    int n;
+
+    if (fgets(str, MAXSTR, stdin) == NULL) {
+        fprintf(stderr, "[ERROR] Invalid reading!\n");
+        return 0;
+    }
+    str[strlen(str) - 1] = '\0';    // Delete the '\n' char from the string
+
+    if (is_int(str)) {
+        n = atoi(str);
+    } else {
+        return 0;
+    }
+
+    if (!value_ok(n)) {
+        return 0;
+    }
+
+    *value = n;
+
+    return 1;
+}
+
+int
 get_card(CardType * card)
 {
     /*
@@ -111,14 +143,26 @@ get_card(CardType * card)
      */
 
     SuitType suit;
+    int value;
+
+    printf("%s", "Suit: ");
 
     // Get the suit:
 
-    if (! get_suit(&suit)) {
+    if (!get_suit(&suit)) {
         return 0;
     }
 
+    printf("%s\n", "Value: ");
+
     // Read the value:
+
+    if (!get_value(&value)) {
+        return 0;
+    }
+
+    card->suit = suit;
+    card->value = value;
 }
 
 void
@@ -140,6 +184,8 @@ add_card(ListType * list)
     while (!get_card(&card)) {
         fprintf(stderr, "[ERROR] Invalid card!\n");
     }
+
+    // Now, I have the card saved at 'card'
 }
 
 void
@@ -180,7 +226,6 @@ main(int argc, char ** argv)
 
         if (itemOk(item)) {
             run_action(item, &finish, &list);
-            printf("Run action!\n");
         } else {
             fprintf(stderr, "[ERROR] Invalid input!\n");
         }
