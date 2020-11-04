@@ -19,6 +19,7 @@ typedef struct CellType CellType;
 struct CellType {
     CardType card;
     CellType *next;
+    CellType *prev;
 };
 
 typedef struct ListType ListType;
@@ -29,3 +30,5 @@ struct ListType {
 };
 
 void push(ListType * list, CardType card);
+void delete(ListType * list);
+void print_list(ListType list);

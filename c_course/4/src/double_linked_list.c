@@ -47,7 +47,7 @@ read_char(char * output)
 
     char c;
     int num_chars = 0;
-    
+
     do {
         c = getchar();
 
@@ -185,7 +185,9 @@ add_card(ListType * list)
         fprintf(stderr, "[ERROR] Invalid card!\n");
     }
 
-    // Now, I have the card saved at 'card'
+    // Now, I have the card saved at 'card':
+
+    push(list, card);
 }
 
 void
@@ -201,7 +203,7 @@ run_action(char item, int * finish, ListType * list)
 
         case '3':
             break;
-        
+
         default:
             *finish = 1;
     }
@@ -213,7 +215,11 @@ main(int argc, char ** argv)
     char item;
     int finish;
 
-    ListType list;
+    ListType list = {
+        .first = NULL,
+        .last = NULL,
+        .size = 0,
+    };
 
     finish = 0;
     do{
@@ -231,6 +237,10 @@ main(int argc, char ** argv)
         }
 
     }while (!finish);
+
+    print_list(list);
+
+    delete(&list);
 
     exit(EXIT_SUCCESS);
 }
