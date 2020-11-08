@@ -240,7 +240,7 @@ main(int argc, char ** argv)
 
     print_list(list);
 
-    delete(&list);
+    delete_list(&list);
 
     exit(EXIT_SUCCESS);
 }

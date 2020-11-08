@@ -41,7 +41,7 @@ push(ListType * list, CardType card)
 }
 
 void
-delete(ListType * list)
+delete_list(ListType * list)
 {
     /*
      * Delete all the list
