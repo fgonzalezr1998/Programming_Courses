@@ -236,7 +236,7 @@ main(int argc, char ** argv)
             fprintf(stderr, "[ERROR] Invalid input!\n");
         }
 
-    }while (!finish);
+    } while (!finish);
 
     print_list(list);
 
