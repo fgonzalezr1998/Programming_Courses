@@ -36,7 +36,12 @@ push(ListType * list, CardType card)
         list->last = cell;
         list->size = 1;
     } else {
-        printf("Not empty list");
+        // Add as a stack
+        cell->next = list->first;
+        cell->prev = NULL;
+        list->first->prev = cell;
+        list->first = cell;
+        list->size++;
     }
 }
 

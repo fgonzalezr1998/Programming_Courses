@@ -153,7 +153,7 @@ get_card(CardType * card)
         return 0;
     }
 
-    printf("%s\n", "Value: ");
+    printf("%s", "Value: ");
 
     // Read the value:
 
