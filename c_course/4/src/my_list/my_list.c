@@ -37,12 +37,36 @@ push(ListType * list, CardType card)
         list->size = 1;
     } else {
         // Add as a stack
+
         cell->next = list->first;
         cell->prev = NULL;
         list->first->prev = cell;
         list->first = cell;
         list->size++;
     }
+}
+
+void
+pop(ListType * list, CardType * card)
+{
+    /*
+     * Pop one element from the list
+     */
+
+    CellType *aux;
+
+    memcpy(card, &(list->first->card), sizeof(CardType));
+
+    aux = list->first;
+    list->first = list->first->next;
+    if (list->first != NULL)
+        list->first->prev = NULL;
+    else
+        list->last = NULL;
+
+    list->size--;
+
+    free(aux);
 }
 
 void

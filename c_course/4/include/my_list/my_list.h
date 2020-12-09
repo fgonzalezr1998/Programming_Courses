@@ -30,5 +30,7 @@ struct ListType {
 };
 
 void push(ListType * list, CardType card);
+void pop(ListType * list, CardType * card);
 void delete_list(ListType * list);
 void print_list(ListType list);
+void print_card(CardType card);

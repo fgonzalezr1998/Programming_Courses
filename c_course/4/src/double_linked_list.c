@@ -191,6 +191,19 @@ add_card(ListType * list)
 }
 
 void
+delete_card(ListType * list)
+{
+    CardType *card = (CardType*)malloc(sizeof(CardType));
+
+    pop(list, card);
+
+    printf("Card deleted:\n");
+    print_card(*card);
+
+    free(card);
+}
+
+void
 run_action(char item, int * finish, ListType * list)
 {
     switch (item) {
@@ -199,6 +212,7 @@ run_action(char item, int * finish, ListType * list)
             break;
 
         case '2':
+            delete_card(list);
             break;
 
         case '3':
@@ -232,6 +246,7 @@ main(int argc, char ** argv)
 
         if (itemOk(item)) {
             run_action(item, &finish, &list);
+            printf("-----------\n");
         } else {
             fprintf(stderr, "[ERROR] Invalid input!\n");
         }
