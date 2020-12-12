@@ -216,6 +216,7 @@ run_action(char item, int * finish, ListType * list)
             break;
 
         case '3':
+            print_list(*list);
             break;
 
         default:
@@ -252,8 +253,6 @@ main(int argc, char ** argv)
         }
 
     } while (!finish);
-
-    print_list(list);
 
     delete_list(&list);
 
