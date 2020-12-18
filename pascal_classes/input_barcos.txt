@@ -24,4 +24,17 @@ Fragata
 C
 5
 Horizontal
+Jugador
+Dragaminas
+H
+8
+Vertical
+Submarino
+I
+8
+Vertical
+Dragaminas
+I
+2
+Horizontal
 Fin

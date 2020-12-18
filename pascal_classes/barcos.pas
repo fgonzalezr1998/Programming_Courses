@@ -11,8 +11,6 @@ const
     LongFrag = 2;
     LongDrag = 3;
 
-    Debug = False;
-
 {Tipos de Datos:}
 
 type
@@ -92,7 +90,7 @@ begin
     inicial_barco := c;
 end;
 
-procedure actualizar_casilla(b: TipoBarco; desp: integer; var c: TipoCasilla)
+procedure actualizar_casilla(b: TipoBarco; desp: integer; var c: TipoCasilla);
 {
     'desp': Desplazamiento con respecto a la casilla donde se encuentra la
             proa del barco
@@ -104,15 +102,15 @@ begin
             begin
                 ind := index_columna(b.casilla.col) + desp;
                 {Actualizar casilla}
-                cas.fila := b.casilla.fila;
-                cas.col := columna(ind);
+                c.fila := b.casilla.fila;
+                c.col := columna(ind);
             end
             else
             begin
                 ind := b.casilla.fila + desp;
                 {Actualizar casilla}
-                cas.col := b.casilla.col;
-                cas.fila := ind;
+                c.col := b.casilla.col;
+                c.fila := ind;
             end;
 end;
 
@@ -208,20 +206,6 @@ begin
     end;
 end;
 
-procedure impr_jugada(j: TipoJugada);
-var
-    i: integer;
-begin
-    for i:= 0 to MaxBarcos - 1 do
-    begin
-        writeln(j[i].clase);
-        write(j[i].casilla.col);
-        writeln(j[i].casilla.fila);
-        writeln(j[i].ori);
-        writeln('---------');
-    end;
-end;
-
 var
     comando: TipoComando;
     jugada: TipoJugada;
@@ -232,8 +216,6 @@ begin
         if (comando <> fin) then
         begin
             leer_jugada(jugada);
-            if (Debug) then
-                impr_jugada(jugada);
             impr_tablero(jugada);
         end;
     until (comando = Fin);
